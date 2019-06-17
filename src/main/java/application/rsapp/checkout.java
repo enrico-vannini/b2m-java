@@ -7,12 +7,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.logging.Logger;
 
 @WebServlet(urlPatterns = "/checkout")
 
 public class checkout extends HttpServlet {
 
   private static final long serialVersionUID = 1L;
+Logger logger = Logger.getLogger("rsapp.checkout");
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -27,7 +29,7 @@ public class checkout extends HttpServlet {
 
     if (errorState) {
       msg = "RSAP0001I: Transaction OK.";
-      // logger.info(msg);
+      logger.info(msg);
       response.setContentType("application/json");
 
       PrintWriter pw = response.getWriter();
@@ -36,7 +38,7 @@ public class checkout extends HttpServlet {
 
     } else {
       msg = "RSAP0010E: Severe problem detected.";
-      // logger.severe(msg);
+      logger.severe(msg);
       response.sendError(500, msg);
     }
   }
